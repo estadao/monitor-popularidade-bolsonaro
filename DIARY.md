@@ -2,7 +2,7 @@
 
 ## Estado do trabalho de coleta
 
-- Até `09/12/2019`, foram compilados os dados das pesquisas CNI/Ibope entre Dezembro de 2019 e Março de 2018. Não foram compiladas, ainda, as pesquisas Ibope sem dados da CNI.
+- Até `09/12/2019`, foram compilados os dados das pesquisas CNI/Ibope entre Dezembro de 2019 e Março de 2018. Não foram compiladas, ainda, as pesquisas Ibope que não tenham sido encomendadas pela CNI (jan., fev. e abr. de 2019)
 
 ## Observações sobre comparação histórica
 
