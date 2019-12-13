@@ -31,9 +31,3 @@ g.y-axis > .tick line {
   stroke-dasharray: 2,3;
 
 }
-
-#line-jair-bolsonaro {
-
-  pointer-events: none;
-
-}
