@@ -349,9 +349,9 @@ function drawChart(fp, segment, presidents) {
           for (i = 0; i < dayCounts.length; i++) {
 
             let diff = Math.abs(dayCounts[i] - bolsoDays);
-            console.log("smallerDiff is", smallerDiff)
-            console.log("Computing",  dayCounts[i], "-", bolsoDays)
-            console.log("this diff is", diff)
+            // console.log("smallerDiff is", smallerDiff)
+            // console.log("Computing",  dayCounts[i], "-", bolsoDays)
+            // console.log("this diff is", diff)
 
             if (diff < smallerDiff) {
               console.log("replacing smallerDiff")
