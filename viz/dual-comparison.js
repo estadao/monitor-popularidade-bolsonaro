@@ -349,12 +349,12 @@ function drawChart(fp, segment, presidents) {
           for (i = 0; i < dayCounts.length; i++) {
 
             let diff = Math.abs(dayCounts[i] - bolsoDays);
-            // console.log("smallerDiff is", smallerDiff)
-            // console.log("Computing",  dayCounts[i], "-", bolsoDays)
-            // console.log("this diff is", diff)
+            console.log("smallerDiff is", smallerDiff)
+            console.log("Computing",  dayCounts[i], "-", bolsoDays)
+            console.log("this diff is", diff)
 
             if (diff < smallerDiff) {
-              // console.log("replacing smallerDiff")
+              console.log("replacing smallerDiff")
               smallerDiff = diff;
               selectedIndex = i;
             } // End of if
@@ -365,15 +365,14 @@ function drawChart(fp, segment, presidents) {
 
         } // End of computeCloserMonth
 
-        console.log("Compute info", presidents);
-
         let dataBolsonaro = data.filter(d => d.key == "Jair Bolsonaro")[0].values;
         let dataOther     = data.filter(d => d.key != "Jair Bolsonaro")[0].values;
 
+        console.log(dataBolsonaro);
         console.log(dataOther);
         let bolsoTime      = computeBolsoTime(dataBolsonaro);
         let bolsoMeasure   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
-        let otherMeasure   = computeClosestPoll(dataOther, bolsoTime.months, measure);
+        let otherMeasure   = computeClosestPoll(dataOther, bolsoTime.days, measure);
 
         let comparison = bolsoMeasure > otherMeasure ? "maior" : "menor";
 
@@ -387,7 +386,6 @@ function drawChart(fp, segment, presidents) {
 
       let explainerDiv = d3.select("div.span-holder.chart-explainer");
 
-      console.log(presidents);
       let info = computeInfo(data, measure, presidents);
       explainerDiv.html(info);
 
@@ -403,7 +401,6 @@ function drawChart(fp, segment, presidents) {
              scales.y,
              measure);
 
-    console.log(presidents);
     updateExplainer(filteredData,
                     measure,
                     presidents);
