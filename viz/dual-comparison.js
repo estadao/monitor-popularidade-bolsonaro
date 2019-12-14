@@ -73,14 +73,14 @@ function drawChart(fp, segment, presidents) {
     /* This function uses d3.filter to
     keep only the relevant datapoints */
 
-      data = data.filter(function(d) {
+    data = data.filter(function(d) {
 
-        return d.SEGMENTO  == segment &&
-               presidents.includes(d.PRESIDENTE);
+      return d.SEGMENTO  == segment &&
+             presidents.includes(d.PRESIDENTE);
 
-      }) // End of d3 filter
+    }) // End of d3 filter
 
-      return data;
+    return data;
 
   } // End of filterData
 
@@ -100,6 +100,37 @@ function drawChart(fp, segment, presidents) {
 
   } // End of nestData;
 
+  function setScales(dimensions) {
+    /* This function uses the width and height specified
+    in dimensions to calculate the x and y position scales.
+    It uses d3 built-in methods to do so. */
+
+    const xPositionScale = d3.scaleLinear()
+      .domain([ 1, 2920 ]) // From the first day in power to the last day of the second term
+      .range([0, dimensions.width]);
+
+    const yPositionScale = d3.scaleLinear()
+      .domain([0, 100]) // From 0% to 100% approval/disapproval
+      .range([ dimensions.height, 0 ]);
+
+    const yUpwardScale = d3.scaleLinear()
+      .domain([0, 100]) // From 0% to 100% approval/disapproval
+      .range([ dimensions.height / 2, 30 ]);
+
+    const yDownwardScale = d3.scaleLinear()
+      .domain([0, 100]) // From 0% to 100% approval/disapproval
+      .range([ dimensions.height / 2 + 30, dimensions.height]);
+
+    return {
+
+      x: xPositionScale,
+      y: yPositionScale,
+      yUp: yUpwardScale,
+      yDown: yDownwardScale
+
+    };
+
+  } // End of setScales
 
   function setDimensions() {
     /* This function determines the
@@ -129,19 +160,19 @@ function drawChart(fp, segment, presidents) {
 
 
     let dimensions = { };
-    dimensions.margin = { top: 20, left: 30, right: 20, bottom: 50};
+    dimensions.margin = { top: 20, left: 60, right: 20, bottom: 50};
 
     if ( isMobile() ) {
 
       
-      dimensions.height = 500 - dimensions.margin.top - dimensions.margin.bottom,
+      dimensions.height = 400 - dimensions.margin.top - dimensions.margin.bottom,
       dimensions.width  = 320 - dimensions.margin.left - dimensions.margin.right;
 
     } // End of if
 
     else {
 
-      dimensions.height = 500 - dimensions.margin.top - dimensions.margin.bottom,
+      dimensions.height = 400 - dimensions.margin.top - dimensions.margin.bottom,
       dimensions.width  = 800 - dimensions.margin.left - dimensions.margin.right;
 
     } // End of else
@@ -158,45 +189,23 @@ function drawChart(fp, segment, presidents) {
 
       const svg = d3.select(cssSelector)
         .append("svg")
+          .attr("class", "main-chart")
           .attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
           .attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
         .append("g")
+          .attr("class", "main-chart")
           .attr("transform", `translate(${dimensions.margin.left},${dimensions.margin.top})`)
-
-      return svg;
 
   } // End of addSvg
 
-  function setScales(dimensions) {
-    /* This function uses the width and height specified
-    in dimensions to calculate the x and y position scales.
-    It uses d3 built-in methods to do so. */
-
-    const xPositionScale = d3.scaleLinear()
-      .domain([ 1, 2920 ]) // From the first day in power to the last day of the second term
-      .range([0, dimensions.width]);
-
-    const yPositionScale = d3.scaleLinear()
-      .domain([0, 100]) // From 0% to 100% approval/disapproval
-      .range([ dimensions.height, 0 ]);
-
-    return {
-
-      x: xPositionScale,
-      y: yPositionScale
-
-    };
-
-  } // End of setScales
-
-  function addAxis(svg, scales, dimensions) {
+  function addAxis(cssSelector, scales, dimensions) {
     /* This function draws the x and y axis
     of the chart, using the scales and dimensions
     that we set previously */
 
-    function addXAxis(svg, scales, dimensions) {
+    function addXAxis(cssSelector, scale, dimensions) {
 
-      const xAxis = d3.axisBottom(scales.x)
+      const xAxis = d3.axisBottom(scale)
         .tickFormat(function(d) {
 
           let tick = d / 365;
@@ -215,7 +224,8 @@ function drawChart(fp, segment, presidents) {
         }) // End of function(d);
         .tickValues( d3.range ( 365, 365 * 7 + 1, 365 ) ); // Show ticks every 365 days
 
-      svg.append("g")
+      d3.select(cssSelector)
+        .append("g")
         .attr("class", "x-axis")
         .attr("fill", "black")
         .attr("transform", `translate(0,${dimensions.height})`)
@@ -225,125 +235,227 @@ function drawChart(fp, segment, presidents) {
 
     } // End of addXAxis
 
-    function addYAxis(svg, scales, dimensions) {
+    function addYAxis(cssSelector, scale, dimensions) {
 
-      const yAxis = d3.axisLeft(scales.y)
+      const yAxis = d3.axisLeft(scale)
         .tickFormat(function(d){
 
           return `${d}%`;
 
         }) // End of function(d)
         .tickSize(0 - dimensions.width) // Make the ticks occupy the whole svg, left to right
+        .tickValues([0, 25, 50, 75, 100]);
 
-      svg.append("g")
+      d3.select(cssSelector)
+        .append("g")
         .attr("class", "y-axis")
+        .attr("fill", "black")
         .call(yAxis)
         .select(".domain") // Selects the axis vertical line...
-          .remove();      // ...and removes it
+          .remove();       // ...and removes it
 
-    } // End of addYAaxis
+    } // End of addYAxis
 
-    addXAxis(svg, scales, dimensions);
-    addYAxis(svg, scales, dimensions);
+    addXAxis(cssSelector, scales.x, dimensions);
+    addYAxis(cssSelector, scales.y, dimensions);
 
   } // End of addAxis
 
-  function addLines(data, svgElement, scales) {
-    /* This function draws the lines 
-    representing the actual datapoints */
+  function plotData(data, presidents, svgSelector, scales, measure) {
+    /* Proccess the data and plots
+    the relevant datapoints */
 
-    const lineGenerator = d3.line()
-      .x(function(d) {
-        return scales.x(+d.DIA_MANDATO);
-      })
-      .y(function(d){
-        return scales.y(+d.POSITIVA);
-      })
-      .curve(d3.curveStep);
+    function addLines(data, svgSelector, lineSelector, xScale, yScale, measure) {
+      /* This function draws the lines 
+      representing the actual datapoints */
 
-    console.log("This is data in addLines:", data);
-
-    const lines = svgElement.selectAll(".president-line")
-      .data(data)
-      .enter()
-        .append("path")
-        .attr("class", "president-line")
-        .attr("id", function(d){
-          let id = d.key.toLowerCase();
-              id = id.replace(/ /g, '-'); // Regex to remove spaces
-          return `line-${id}`; 
+      const lineGenerator = d3.line()
+        .x(function(d) {
+          return xScale(+d.DIA_MANDATO);
         })
-        .attr("fill", "none")
-        .attr("stroke-width", 3)
-        .attr("stroke", function(d){
-          if (d.key === "Jair Bolsonaro") {
-            return "#19c119"
-          }
-          else {
-            return "gray";
-          }
+        .y(function(d){
+          return yScale(+d[measure]);
         })
-        .attr("d", function(d){
-          return lineGenerator(d.values);
-        })
-        .on("mouseover", function(d){
+        .curve(d3.curveStep);
 
-          let element = d3.select(this);
-              element.attr("stroke", "red")
+      const svg = d3.select(svgSelector);
 
-        })
-        .on("mouseout", function(d){
+      svg.selectAll(lineSelector)
+        .data(data)
+        .enter()
+          .append("path")
+          .attr("class", "president-line")
+          .attr("id", function(d){
+            let id = d.key.toLowerCase();
+                id = id.replace(/ /g, '-'); // Regex to remove spaces
+            return `line-${id}`; 
+          })
+          .attr("fill", "none")
+          .attr("stroke-width", 3)
+          .attr("stroke", function(d){
+            if (d.key === "Jair Bolsonaro") {
+              return "#60c060"
+            }
+            else {
+              return "#303030";
+            }
+          })
+          .attr("d", function(d){
+            return lineGenerator(d.values);
+          })
 
-          let element = d3.select(this);
+    } // End of addLines
 
-          if (element.attr("id") == "line-jair-bolsonaro")
-            element.attr("stroke", "#19c119");
+    function addPoints(data, svgSelector, pointSelector, xScale, yScale, measure) {
 
-          else
-            element.attr("stroke", "gray")
-        });
+    } // End of addPoints
 
-  } // End of addLines
+    function updateExplainer(data, measure, presidents) {
+      /* Updates the dynamic explainer 
+      text below the mais chart */
+
+      function computeInfo(data, measure, presidents) {
+
+        function computeBolsoTime(dataArray) {
+          /* This functions how many days passed
+          from the beginning of Bolsonaro's term
+          to the latest poll. It then divides the
+          day count by 30 to estimate the numbers
+          of months that have passed since them */
+
+          let dayCounts = dataArray.map(d => d.DIA_MANDATO);
+          let passedDays = d3.max(dayCounts)
+
+          return {
+
+           days: passedDays,
+           months: Math.round(passedDays / 30)
+
+          };
+
+        } // End of computeBolsoMonth
+
+        function computeClosestPoll(dataArray, bolsoDays, measure) {
+          /* This functions receives an int as an argument:
+          how many months after Bolsonaro's term start the 
+          last poll was released; it then uses this number 
+          to find the poll that was released the closer to
+          this time interval for another president */
+
+          let dayCounts = dataArray.map(d => d.DIA_MANDATO);
+
+          let selectedIndex = 0;
+          let smallerDiff = 99999;
+          for (i = 0; i < dayCounts.length; i++) {
+
+            let diff = Math.abs(dayCounts[i] - bolsoDays);
+            // console.log("smallerDiff is", smallerDiff)
+            // console.log("Computing",  dayCounts[i], "-", bolsoDays)
+            // console.log("this diff is", diff)
+
+            if (diff < smallerDiff) {
+              // console.log("replacing smallerDiff")
+              smallerDiff = diff;
+              selectedIndex = i;
+            } // End of if
+
+          } // End of for
+
+          return dataArray[selectedIndex][measure];
+
+        } // End of computeCloserMonth
+
+        console.log("Compute info", presidents);
+
+        let dataBolsonaro = data.filter(d => d.key == "Jair Bolsonaro")[0].values;
+        let dataOther     = data.filter(d => d.key != "Jair Bolsonaro")[0].values;
+
+        console.log(dataOther);
+        let bolsoTime      = computeBolsoTime(dataBolsonaro);
+        let bolsoMeasure   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
+        let otherMeasure   = computeClosestPoll(dataOther, bolsoTime.months, measure);
+
+        let comparison = bolsoMeasure > otherMeasure ? "maior" : "menor";
+
+        let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasure}%</strong></span>, <span class="dynamic"> <strong>${comparison}</strong></span> que a de <span class="dynamic">${presidents[1]} <strong>(${otherMeasure}%)</strong></span> no mesmo período.</p>`;
+
+        return htmlContent;
+
+      } // End of computeInfo
+
+
+
+      let explainerDiv = d3.select("div.span-holder.chart-explainer");
+
+      console.log(presidents);
+      let info = computeInfo(data, measure, presidents);
+      explainerDiv.html(info);
+
+    } // End of updateExplainer 
+
+    let filteredData = filterData(data, segment, presidents);
+        filteredData = nestData(filteredData);
+
+    addLines(filteredData,
+             svgSelector,
+             ".preisdente-line-up",
+             scales.x,
+             scales.y,
+             measure);
+
+    console.log(presidents);
+    updateExplainer(filteredData,
+                    measure,
+                    presidents);
+
+  } // End of plotData
+
+  ////////////////////////////
+  // STARTS EXECUTION AFTER //
+  //   READING THE CSV IN   //
+  ////////////////////////////
 
   d3.csv(fp).then(function(csvData) {
 
-    ///////////////////////////////////
-    ////// INTERACTION FUNCTIONS //////
-    ///////////////////////////////////
+    ///////////////////////////
+    // INTERACTION FUNCTIONS //
+    //////////////////////////
 
     function addListeners() {
-
       /* Adds the relevant event listeners to 
       the HTML elements of the page */
 
-      document.querySelector("select.drawer")
+      document.querySelector("select.president-selector")
+              .addEventListener("change", redrawLines);
+
+      document.querySelector("select.measure-selector")
               .addEventListener("change", redrawLines);
 
     } // End of addListeners
 
-
     function redrawLines() {
+      /* Redraws the chart after selecting
+      a new president on the dropdown */
 
-        /* Redraws the chart after selecting
-        a new president on the dropdown */
+      console.log("Redraw!");
 
-        console.log("Redraw!");
+      d3.selectAll('.president-line')
+        .attr("stroke-width", 0)
+        .remove();
 
-        d3.selectAll('.president-line')
-          .attr("stroke-width", 0)
-          .remove();
+      let selector = document.querySelector("select.president-selector"),
+          presidentValue = selector.options[selector.selectedIndex].value;
+          presidenText  = selector.options[selector.selectedIndex].text;
 
-        let selector = document.querySelector("select.drawer"),
-               value = selector.options[selector.selectedIndex].value;
-               text  = selector.options[selector.selectedIndex].text;
+      selector = document.querySelector("select.measure-selector");
+      let measureValue = selector.options[selector.selectedIndex].value,
+          measureText  = selector.options[selector.selectedIndex].text;
 
-        filteredData = filterData(csvData, segment, ["Jair Bolsonaro", value ]);
-        filteredData = nestData(filteredData);
-
-        console.log(svg, scales, dimensions);
-        console.log(filteredData);
-
-        lines = addLines(filteredData, svg, scales);
+      plotData(csvData,
+               [ "Jair Bolsonaro", presidentValue ],
+               "g.main-chart",
+               chartScales,
+               measureValue);
 
     } // End of redrawLines
 
@@ -352,22 +464,28 @@ function drawChart(fp, segment, presidents) {
 
     addListeners();
 
-    const dimensions = setDimensions();
-    const scales = setScales(dimensions);
-    const svg = addSvg( ".chart", dimensions );
-
-    addAxis(svg, scales, dimensions); // TO DO: return axis as variable
-
     csvData = parseData(csvData);
 
-    let filteredData = filterData(csvData, segment, presidents);
-        filteredData = nestData(filteredData);
+    const chartDimensions = setDimensions(),
+          chartScales     = setScales(chartDimensions);
 
-    addLines(filteredData, svg, scales);
+    addSvg(".chart", 
+           chartDimensions);
+
+    addAxis("g.main-chart", 
+            chartScales, 
+            chartDimensions);
+
+    plotData(csvData,
+             presidents,
+             "g.main-chart",
+             chartScales,
+             "POSITIVA");
+
 
   }) // End of d3.csv
 
 
 } // End of draw chart
 
-drawChart("../data/datafolha.csv", "total", [ "Jair Bolsonaro", "Michel Temer" ] );
+drawChart("../data/evolucao-ibope-limpo.csv", "total", [ "Jair Bolsonaro", "Michel Temer" ] );

@@ -4,18 +4,109 @@ h1 {
 
 }
 
-svg {
+body {
 
   background-color: #FAFAFA;
 
 }
 
-/* Customizes tick font */
-g.x-axis > g.tick text {
+div.content {
+  margin: auto;
+  padding: 10px;
+  max-width: 1200px;
+}
 
-  font-size: 12px;
+div.holder {
+  margin: auto;
+  padding: 10px;
+  max-width: 900px;
+}
+
+div.chart {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+div.span-holder {
+  text-align: center;
+  line-height: 1.7;
+}
+
+span.common {
+
+  font-size: 32px;
+  font-family: Lato, sans-serif;
 
 }
+
+span.bolso {
+
+  font-weight: bolder;
+  color: #60c060;
+
+}
+
+span.dynamic {
+  background-color: #f0d8a8;
+  border-radius: 999px;
+  padding: 5px;
+  font-weight: bolder;
+  color: #303030;
+}
+
+.chart-explainer {
+  margin: auto;
+  line-height: 1.8;
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  max-width: 620px;
+  text-align: left;
+  align-items: center;
+}
+
+.select-wrap {
+  position: relative;
+  display: inline-flex;
+  /* justify-content: center; */
+  align-items: center;
+  top: -.25em;
+  margin: 0 .5em;
+}
+
+select {
+  font-size: 32px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align-last: center;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  padding-left: 5px;
+  padding-right: 18px;
+  padding-bottom: 3px;
+  border: 1px solid #303030;
+  border-radius: 2px;
+
+}
+
+/* 
+//////////////////////
+// D3 customization //
+//////////////////////
+                    */
+
+
+/* Customizes tick font */
+g.tick > text {
+
+  padding: 20px;
+  font-size: 18px;
+
+}
+
 
 /* Removes first y-axis line */
 g.y-axis > g.tick:first-child > line {
@@ -31,3 +122,5 @@ g.y-axis > .tick line {
   stroke-dasharray: 2,3;
 
 }
+
+

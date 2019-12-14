@@ -1,0 +1,136 @@
+PRESIDENTE,DATA_PESQUISA,POSITIVA,REGULAR,NEGATIVA,NAO_SABE,SEGMENTO
+José Sarney,1986-03-01,71,26,2,1,total
+José Sarney,1986-12-01,34,45,20,1,total
+José Sarney,1987-03-01,33,46,19,2,total
+José Sarney,1987-12-01,16,38,44,2,total
+José Sarney,1989-04-01,10,35,54,2,total
+José Sarney,1989-05-01,9,33,56,2,total
+José Sarney,1989-06-01,7,29,62,2,total
+José Sarney,1989-07-01,7,28,64,2,total
+José Sarney,1989-11-01,9,28,60,3,total
+Fernando Collor,1990-05-01,45,39,12,5,total
+Fernando Collor,1990-07-01,33,45,20,2,total
+Fernando Collor,1990-08-01,35,44,19,2,total
+Fernando Collor,1990-12-01,30,45,24,2,total
+Fernando Collor,1991-02-01,27,44,27,2,total
+Fernando Collor,1991-04-01,24,44,32,2,total
+Fernando Collor,1991-08-01,20,44,32,2,total
+Fernando Collor,1992-02-01,14,38,46,3,total
+Fernando Collor,1992-04-01,17,41,39,3,total
+Fernando Collor,1992-05-01,17,40,41,3,total
+Fernando Collor,1992-08-01,12,23,59,6,total
+Itamar Franco,1992-11-01,35,37,11,18,total
+Itamar Franco,1993-01-01,34,44,9,13,total
+Itamar Franco,1993-05-01,17,51,26,6,total
+Itamar Franco,1993-08-01,15,42,37,6,total
+Itamar Franco,1994-01-01,12,42,40,6,total
+Itamar Franco,1994-03-01,19,45,32,4,total
+Itamar Franco,1994-04-01,15,46,36,5,total
+Itamar Franco,1994-07-01,30,49,16,5,total
+Itamar Franco,1994-09-01,33,47,15,5,total
+Itamar Franco,1994-12-01,46,38,11,4,total
+Fernando Henrique Cardoso,1995-03-01,41,43,12,3,total
+Fernando Henrique Cardoso,1995-06-01,42,38,16,4,total
+Fernando Henrique Cardoso,1995-09-01,40,43,15,3,total
+Fernando Henrique Cardoso,1995-11-01,43,40,15,2,total
+Fernando Henrique Cardoso,1996-02-01,41,39,17,3,total
+Fernando Henrique Cardoso,1996-05-01,35,37,24,4,total
+Fernando Henrique Cardoso,1996-08-01,38,40,19,2,total
+Fernando Henrique Cardoso,1996-11-01,46,36,16,2,total
+Fernando Henrique Cardoso,1997-03-01,51,34,14,2,total
+Fernando Henrique Cardoso,1997-05-01,34,37,26,4,total
+Fernando Henrique Cardoso,1997-08-01,38,35,24,4,total
+Fernando Henrique Cardoso,1997-10-01,43,37,17,3,total
+Fernando Henrique Cardoso,1998-01-01,42,41,16,2,total
+Fernando Henrique Cardoso,1998-03-01,38,39,21,2,total
+Fernando Henrique Cardoso,1998-05-01,33,39,26,3,total
+Fernando Henrique Cardoso,1998-07-01,37,43,19,1,total
+Fernando Henrique Cardoso,1998-11-01,40,37,21,2,total
+Fernando Henrique Cardoso,1999-03-01,22,34,41,3,total
+Fernando Henrique Cardoso,1999-07-01,16,30,52,3,total
+Fernando Henrique Cardoso,1999-09-01,17,30,51,3,total
+Fernando Henrique Cardoso,1999-11-01,17,32,48,4,total
+Fernando Henrique Cardoso,2000-02-01,20,37,39,4,total
+Fernando Henrique Cardoso,2000-05-01,20,32,45,3,total
+Fernando Henrique Cardoso,2000-08-01,20,36,39,5,total
+Fernando Henrique Cardoso,2000-12-01,25,39,34,3,total
+Fernando Henrique Cardoso,2001-03-01,26,38,31,5,total
+Fernando Henrique Cardoso,2001-06-01,19,33,45,4,total
+Fernando Henrique Cardoso,2001-09-01,22,41,36,2,total
+Fernando Henrique Cardoso,2001-12-01,21,40,37,2,total
+Fernando Henrique Cardoso,2002-03-02,28,39,31,2,total
+Fernando Henrique Cardoso,2002-06-02,29,41,29,2,total
+Fernando Henrique Cardoso,2002-09-01,24,37,36,2,total
+Fernando Henrique Cardoso,2002-10-01,22,39,36,2,total
+Lula,2003-03-01,51,36,7,6,total
+Lula,2003-06-01,43,38,11,8,total
+Lula,2003-09-01,43,40,14,4,total
+Lula,2003-12-03,41,43,14,3,total
+Lula,2004-03-01,34,41,23,2,total
+Lula,2004-06-01,29,42,26,2,total
+Lula,2004-09-01,38,40,19,2,total
+Lula,2004-11-01,41,41,16,2,total
+Lula,2005-03-01,39,41,17,3,total
+Lula,2005-06-01,35,41,22,2,total
+Lula,2005-09-01,29,36,32,2,total
+Lula,2005-12-01,29,37,32,2,total
+Lula,2006-03-01,38,39,22,1,total
+Lula,2006-06-01,44,36,19,1,total
+Lula,2006-07-01,40,40,19,1,total
+Lula,2006-09-01,49,33,16,1,total
+Lula,2006-12-01,57,28,13,2,total
+Lula,2007-03-01,49,33,16,1,total
+Lula,2007-06-01,50,33,16,1,total
+Lula,2007-09-01,48,32,18,1,total
+Lula,2007-12-01,51,31,17,0,total
+Lula,2008-03-01,58,30,11,1,total
+Lula,2008-06-01,58,29,12,1,total
+Lula,2008-09-01,69,23,8,1,total
+Lula,2008-12-01,73,20,6,0,total
+Lula,2009-03-01,64,25,10,1,total
+Lula,2009-05-01,68,24,8,0,total
+Lula,2009-09-01,69,22,9,0,total
+Lula,2009-11-01,72,21,6,0,total
+Lula,2010-03-01,75,19,5,1,total
+Lula,2010-06-01,75,20,3,0,total
+Lula,2010-09-01,77,18,4,0,total
+Lula,2010-12-01,80,16,4,0,total
+Dilma Rousseff,2011-03-01,56,27,5,11,total
+Dilma Rousseff,2011-07-01,48,36,12,4,total
+Dilma Rousseff,2011-09-01,51,34,11,4,total
+Dilma Rousseff,2011-12-01,56,32,10,3,total
+Dilma Rousseff,2012-03-01,56,34,8,1,total
+Dilma Rousseff,2012-06-01,59,32,8,1,total
+Dilma Rousseff,2012-09-01,62,29,7,1,total
+Dilma Rousseff,2012-12-01,62,29,7,1,total
+Dilma Rousseff,2013-03-01,63,29,7,1,total
+Dilma Rousseff,2013-06-01,55,32,13,1,total
+Dilma Rousseff,2013-07-01,31,37,31,1,total
+Dilma Rousseff,2013-09-01,37,39,22,1,total
+Dilma Rousseff,2013-12-01,43,35,20,1,total
+Dilma Rousseff,2014-03-01,36,36,27,1,total
+Dilma Rousseff,2014-06-01,31,34,33,1,total
+Dilma Rousseff,2014-09-01,38,33,28,1,total
+Dilma Rousseff,2014-12-01,40,32,27,1,total
+Dilma Rousseff,2015-03-01,12,23,64,1,total
+Dilma Rousseff,2015-06-01,9,21,68,1,total
+Dilma Rousseff,2015-09-15,10,21,69,1,total
+Dilma Rousseff,2015-12-15,9,20,70,1,total
+Dilma Rousseff,2016-03-16,10,19,69,1,total
+Michel Temer,2016-06-16,13,36,39,13,total
+Michel Temer,2016-09-16,14,34,39,12,total
+Michel Temer,2016-12-16,13,35,46,6,total
+Michel Temer,2017-03-17,10,31,55,4,total
+Michel Temer,2017-07-17,5,21,70,3,total
+Michel Temer,2017-09-17,3,16,77,3,total
+Michel Temer,2017-12-17,6,19,74,2,total
+Michel Temer,2018-03-18,5,21,72,2,total
+Michel Temer,2018-06-18,4,16,79,1,total
+Michel Temer,2018-09-18,4,12,82,2,total
+Michel Temer,2018-12-18,5,18,74,3,total
+Jair Bolsonaro,2019-01-28,49,26,11,14,total
+Jair Bolsonaro,2019-02-25,39,30,19,12,total
+Jair Bolsonaro,2019-03-18,34,34,25,8,total
+Jair Bolsonaro,2019-04-19,35,31,27,7,total
+Jair Bolsonaro,2019-06-19,32,32,32,3,total
+Jair Bolsonaro,2019-09-19,31,32,34,3,total
