@@ -276,7 +276,7 @@ function drawChart(fp, segment, presidents) {
         .y(function(d){
           return yScale(+d[measure]);
         })
-        .curve(d3.curveStep);
+        .curve(d3.curveStepBefore);
 
       const svg = d3.select(svgSelector);
 
@@ -308,9 +308,56 @@ function drawChart(fp, segment, presidents) {
 
     function addPoints(data, svgSelector, pointSelector, xScale, yScale, measure) {
 
+      // Pulsating points addapted from this codepen:
+      // https://codepen.io/shaneparsons/pen/MpgEma
+
+      let svg = d3.select(svgSelector)
+
+      let realPoints = svg.selectAll(pointSelector)
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("class", "poll-point")
+          .attr("cx", d => xScale(d.DIA_MANDATO))
+          .attr("cy", d => yScale(d[measure]))
+          .attr("r", 3)
+          .attr("fill", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
+          .style("visibility", "hidden")
+          // .html('<animate attributeName=\"r\" from=\"3\" to=\"20\" dur=\"1.5s\" begin=\"0s\" repeatCount=\"indefinite\"/><animate attributeName="opacity" from=\"1\" to=\"0\" dur=\"1.5s\" begin=\"0s\" repeatCount="indefinite\"/>')
+
+      let fakePoints = svg.selectAll("fake-point")
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("class", "fake-point poll-point")
+          .attr("cx", d => xScale(d.DIA_MANDATO))
+          .attr("cy", d => yScale(d[measure]))
+          .attr("r", 3)
+          .attr("fill", "none")
+          .attr("stroke", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
+          .style("visibility", "hidden")
+
+      // Adds animation to the fake point on the outside
+      fakePoints.append("animate")
+                  .attr("attributeName", "r")
+                  .attr("from", "1")
+                  .attr("to", "30")
+                  .attr("dur", "1.5s")
+                  .attr("begin", "0s")
+                  .attr("repeatCount", "indefinite");
+
+      fakePoints.append("animate")
+                  .attr("attributeName", "opacity")
+                  .attr("from", "1")
+                  .attr("to", "0")
+                  .attr("dur", "1.5s")
+                  .attr("begin", "0s")
+                  .attr("repeatCount", "indefinite");
+
+
     } // End of addPoints
 
-    function updateExplainer(data, measure, presidents) {
+    function updateChart(data, measure, presidents, svgSelector, pointSelector) {
       /* Updates the dynamic explainer 
       text below the mais chart */
 
@@ -354,56 +401,83 @@ function drawChart(fp, segment, presidents) {
             // console.log("this diff is", diff)
 
             if (diff < smallerDiff) {
-              console.log("replacing smallerDiff")
+              // console.log("replacing smallerDiff")
               smallerDiff = diff;
               selectedIndex = i;
             } // End of if
 
           } // End of for
 
-          return dataArray[selectedIndex][measure];
+
+          return {
+            date: dataArray[selectedIndex].DATA_PESQUISA,
+            value: dataArray[selectedIndex][measure]
+          }
 
         } // End of computeCloserMonth
 
         let dataBolsonaro = data.filter(d => d.key == "Jair Bolsonaro")[0].values;
         let dataOther     = data.filter(d => d.key != "Jair Bolsonaro")[0].values;
 
-        console.log(dataBolsonaro);
-        console.log(dataOther);
         let bolsoTime      = computeBolsoTime(dataBolsonaro);
-        let bolsoMeasure   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
-        let otherMeasure   = computeClosestPoll(dataOther, bolsoTime.days, measure);
+        let bolsoMeasures   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
+        let otherMeasures   = computeClosestPoll(dataOther, bolsoTime.days, measure);
 
-        let comparison = bolsoMeasure > otherMeasure ? "maior" : "menor";
+        let comparison = bolsoMeasures.value > otherMeasures.value ? "maior" : "menor";
 
-        let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasure}%</strong></span>, <span class="dynamic"> <strong>${comparison}</strong></span> que a de <span class="dynamic">${presidents[1]} <strong>(${otherMeasure}%)</strong></span> no mesmo período.</p>`;
+        let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, <span class="dynamic"> <strong>${comparison}</strong></span> que a de <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
 
-        return htmlContent;
+        return {
+
+          html: htmlContent,
+          highlightDates: [ bolsoMeasures.date, otherMeasures.date ]
+
+        }
 
       } // End of computeInfo
 
+      function showPoint(pointSelector, highlightDates) {
+        /* Makes the two points relevant
+        to the comparison pulsate */
 
+        console.log(highlightDates);
+        d3.selectAll(pointSelector)
+            .style("visibility", d => highlightDates.includes(d.DATA_PESQUISA) ? "visible" : "hidden" );
+
+      } // End of showPoint
 
       let explainerDiv = d3.select("div.span-holder.chart-explainer");
-
       let info = computeInfo(data, measure, presidents);
-      explainerDiv.html(info);
 
-    } // End of updateExplainer 
+      explainerDiv.html(info.html);
+      showPoint(pointSelector, info.highlightDates);
+
+    } // End of updateChart
 
     let filteredData = filterData(data, segment, presidents);
-        filteredData = nestData(filteredData);
+        
+    addPoints(filteredData,
+              svgSelector,
+              ".poll-point",
+              scales.x,
+              scales.y,
+              measure)
+
+    filteredData = nestData(filteredData);
 
     addLines(filteredData,
              svgSelector,
-             ".preisdente-line-up",
+             ".president-line",
              scales.x,
              scales.y,
              measure);
 
-    updateExplainer(filteredData,
-                    measure,
-                    presidents);
+
+    updateChart(filteredData,
+                measure,
+                presidents,
+                svgSelector,
+                ".poll-point");
 
   } // End of plotData
 
@@ -423,21 +497,23 @@ function drawChart(fp, segment, presidents) {
       the HTML elements of the page */
 
       document.querySelector("select.president-selector")
-              .addEventListener("change", redrawLines);
+              .addEventListener("change", redraw);
 
       document.querySelector("select.measure-selector")
-              .addEventListener("change", redrawLines);
+              .addEventListener("change", redraw);
 
     } // End of addListeners
 
-    function redrawLines() {
+    function redraw() {
       /* Redraws the chart after selecting
       a new president on the dropdown */
 
       console.log("Redraw!");
 
       d3.selectAll('.president-line')
-        .attr("stroke-width", 0)
+        .remove();
+
+      d3.selectAll(".poll-point")
         .remove();
 
       let selector = document.querySelector("select.president-selector"),

@@ -1,14 +1,8 @@
 # Diário de dados
 
-## Estado do trabalho de coleta
+## A fazer
 
-- Até `09/12/2019`, foram compilados os dados das pesquisas CNI/Ibope entre Dezembro de 2019 e Março de 2018. Não foram compiladas, ainda, as pesquisas Ibope que não tenham sido encomendadas pela CNI (jan., fev. e abr. de 2019)
-
-## Observações sobre comparação histórica
-
-- As pesquisas de Janeiro, Fevereiro e Abril de 2019 não estão no mesmo padrão das demais, e por isso não foram adicionadas. Os dados de ótimo/bom e ruim/péssimo precisam ser desagregados para ficar no mesmo padrão dos demais.
-
-- Os dados de porte do muncípio mudam de padrão a partir de Setembro de 2018. Até então, a segmentação era a seguinte: [ `Até 50 mil habitantes`, `Mais de 50 a 500 mil habitantes`, `Mais de 500 mil habitatnes`]. Anteriormente, era no seguinte formato: [ `Até 50 mil habitantes`, `Mais de 50 a 100 mil habitantes`, `Mais de 100 mil habitantes` ]
+[ ] Adicionar margem de erro
 
 
 ## Log das alterações manuais
