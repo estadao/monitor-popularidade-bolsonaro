@@ -22,7 +22,7 @@ div.holder {
   max-width: 900px;
 }
 
-div.chart {
+div.main-chart {
   text-align: center;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -49,8 +49,8 @@ span.bolso {
 
 span.dynamic {
   background-color: #f0d8a8;
-  border-radius: 999px;
-  padding: 5px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   font-weight: bolder;
   color: #303030;
 }
@@ -102,18 +102,37 @@ select {
 /* Customizes tick font */
 g.tick > text {
 
-  padding: 20px;
-  font-size: 18px;
+  font-size: 14px;
+
+}
+
+text.tick-highlight {
+
+  font-size: 16px;
+  font-weight: bolder;
 
 }
 
 
-/* Removes first y-axis line */
-g.y-axis > g.tick:first-child > line {
+text.ordinary-tick {
 
-  display: none;
+  font-size: 14px;
+  font-weight: 500;
+  fill: #595959;
 
 }
+
+line.ordinary-line {
+  stroke: #595959;
+  stroke-width: .5px;
+}
+
+line.highlight-line {
+
+  stroke-width: 2px;
+
+}
+
 
 /* Customizes horizonal ticks */
 g.y-axis > .tick line {

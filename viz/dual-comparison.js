@@ -1,5 +1,27 @@
 function drawChart(fp, segment, presidents) {
 
+  function isMobile() {
+      /*
+      This function detects if the screen
+      of the device is mobile (width smaller than
+      800). It returns `true`` if positive,
+      `false` if negative.
+      */
+      if(window.innerWidth <= 800) {
+
+         return true;
+
+      } // End of if
+
+      else {
+
+         return false;
+
+      } // End of else
+
+  } // End of isMobile()
+
+
   /////////////////////////////////////
   ////// CHART DRAWING FUNCTIONS //////
   /////////////////////////////////////
@@ -132,48 +154,31 @@ function drawChart(fp, segment, presidents) {
 
   } // End of setScales
 
-  function setDimensions() {
+
+  function setDimensions(chartType) {
     /* This function determines the
     correct data visualization size
-    for mobile and desktop devices */
-
-    function isMobile() {
-      /*
-      This function detects if the screen
-      of the device is mobile (width smaller than
-      800). It returns `true`` if positive,
-      `false` if negative.
-      */
-      if(window.innerWidth <= 800) {
-
-         return true;
-
-      } // End of if
-
-      else {
-
-         return false;
-
-      } // End of else
-
-    } // End of isMobile()
-
+    for mobile and desktop devices.
+    chartType can be either "mainChart"
+    or smallMultiples, each option
+    resulting in different dimensions
+    for desktop */
 
     let dimensions = { };
-    dimensions.margin = { top: 20, left: 60, right: 20, bottom: 50};
+    dimensions.margin = { top: 20, left: 60, right: 20, bottom: 60};
 
-    if ( isMobile() ) {
+    if ( isMobile() || (chartType == "smallMultiples") ) {
 
       
-      dimensions.height = 400 - dimensions.margin.top - dimensions.margin.bottom,
+      dimensions.height = 300 - dimensions.margin.top - dimensions.margin.bottom,
       dimensions.width  = 320 - dimensions.margin.left - dimensions.margin.right;
 
     } // End of if
 
     else {
 
-      dimensions.height = 400 - dimensions.margin.top - dimensions.margin.bottom,
-      dimensions.width  = 800 - dimensions.margin.left - dimensions.margin.right;
+        dimensions.height = 300 - dimensions.margin.top - dimensions.margin.bottom,
+        dimensions.width  = 800 - dimensions.margin.left - dimensions.margin.right;
 
     } // End of else
 
@@ -181,19 +186,20 @@ function drawChart(fp, segment, presidents) {
 
   } // End of setDimensions
 
-  function addSvg(cssSelector, dimensions) {
+  function addSvg(cssSelector, chartType, dimensions) {
     /* This functions adds a svg on the div
     specified by cssSelector, with the parameters
     specified at dimensions. It returns the selection
     at the end as well. */
 
+
       const svg = d3.select(cssSelector)
         .append("svg")
-          .attr("class", "main-chart")
+          .attr("class", chartType)
           .attr("height", dimensions.height + dimensions.margin.top + dimensions.margin.bottom)
           .attr("width", dimensions.width + dimensions.margin.left + dimensions.margin.right)
         .append("g")
-          .attr("class", "main-chart")
+          .attr("class", chartType)
           .attr("transform", `translate(${dimensions.margin.left},${dimensions.margin.top})`)
 
   } // End of addSvg
@@ -205,33 +211,133 @@ function drawChart(fp, segment, presidents) {
 
     function addXAxis(cssSelector, scale, dimensions) {
 
-      const xAxis = d3.axisBottom(scale)
-        .tickFormat(function(d) {
+      if (!isMobile()) {
 
-          let tick = d / 365;
-          
-          if (tick == 1) {
-            tick = "1º ano";
-          }
-          else if (tick == 7) {
-            tick = "8ª ano";
-          }
-          else {
-            tick = "";
-          }
+        const xAxis = d3.axisBottom(scale)
+          .tickFormat(function(d) {
 
-          return tick;
-        }) // End of function(d);
-        .tickValues( d3.range ( 365, 365 * 7 + 1, 365 ) ); // Show ticks every 365 days
+            let tickNo = d / 365;
 
-      d3.select(cssSelector)
-        .append("g")
-        .attr("class", "x-axis")
-        .attr("fill", "black")
-        .attr("transform", `translate(0,${dimensions.height})`)
-        .call(xAxis)
-        .select(".domain") // Selects the axis vertical line...
-          .remove();       // ...and removes it
+            tickText = `${tickNo + 1}º ano`
+
+            if (tickNo == 0) {
+
+              tickText = "Início"
+
+            }
+
+            else if (tickNo == 4) {
+
+              tickText = "2º mandato";
+
+            }
+
+            else if (tickNo == 8) {
+
+              tickText = "Fim"
+
+            }
+
+            return tickText;
+          }) // End of function(d);
+          .tickValues( d3.range ( 0, 365 * 8 + 1, 365 ) ); // Show ticks every 365 days
+
+        d3.select(cssSelector)
+          .append("g")
+          .attr("class", "x-axis")
+          .attr("fill", "black")
+          .attr("transform", `translate(0,${dimensions.height + 20})`)
+          .call(xAxis)
+          .select(".domain") // Selects the axis vertical line...
+            .remove()       // ...and removes it
+
+        // Format ticks text
+        let tickTexts = d3.selectAll(".x-axis .tick text")
+          .attr("class", function(d){
+            if ( [ 0, 1460, 2920].includes(d) ) { // 1º, 5º and last tick according to the bound datapoints
+             return "tick-highlight";
+            }
+             else {
+              return "ordinary-tick";
+             }
+          });
+
+        // Adds text BELOW the halfway tick
+        d3.select(".x-axis g.tick:nth-of-type(5n)")
+          .append("text")
+          .attr("class", "ordinary-tick")
+          .text("5º ano")
+          .attr("dy", 40);
+
+      } // End of if (isMobile)
+
+
+      else {
+
+        const xAxis = d3.axisBottom(scale)
+          .tickFormat(function(d) {
+
+            let tickNo = d / 365;
+
+            tickText = ""
+
+            if (tickNo == 0) {
+
+              tickText = "Início"
+
+            }
+
+            else if (tickNo == 4) {
+
+              tickText = "2º mandato";
+
+            }
+
+            else if (tickNo == 8) {
+
+              tickText = "Fim"
+
+            }
+
+            return tickText;
+          }) // End of function(d);
+          .tickValues( d3.range ( 0, 365 * 8 + 1, 365 * 4 ) ); // Show ticks every 365 days
+
+        d3.select(cssSelector)
+          .append("g")
+          .attr("class", "x-axis")
+          .attr("fill", "black")
+          .attr("transform", `translate(0,${dimensions.height + 20})`)
+          .call(xAxis)
+          .select(".domain") // Selects the axis vertical line...
+            .remove()       // ...and removes it
+
+        // Format ticks text
+        let tickTexts = d3.selectAll(".x-axis .tick text")
+          .attr("class", function(d){
+            if ( [ 0, 1460, 2920].includes(d) ) { // 1º, 5º and last tick according to the bound datapoints
+             return "tick-highlight";
+            }
+             else {
+              return "ordinary-tick";
+             }
+          });
+
+        // Adds text BELOW the 1st tick
+        let firstTick = d3.select(".x-axis g.tick:first-of-type");
+        firstTick.append("text")
+          .attr("class", "ordinary-tick")
+          .text("1º ano")
+          .attr("dy", 40);
+
+        // Adds text BELOW the halfway tick
+        let secondTick = d3.select(".x-axis g.tick:nth-of-type(2n)");
+        secondTick.append("text")
+          .attr("class", "ordinary-tick")
+          .text("5º ano")
+          .attr("dy", 40);
+
+      } // End of else
 
     } // End of addXAxis
 
@@ -269,6 +375,8 @@ function drawChart(fp, segment, presidents) {
       /* This function draws the lines 
       representing the actual datapoints */
 
+      console.log(data);
+
       const lineGenerator = d3.line()
         .x(function(d) {
           return xScale(+d.DIA_MANDATO);
@@ -278,8 +386,29 @@ function drawChart(fp, segment, presidents) {
         })
         .curve(d3.curveStepBefore);
 
+      // const upperError = d3.line()
+      //   .x(function(d) {
+      //     return xScale(+d.DIA_MANDATO);
+      //   })
+      //   .y(function(d) {
+      //     return yScale(+d[measure] + 2);
+      //   })
+      //   .curve(d3.curveStepBefore);
+
+
+      // const lowerError = d3.line()
+      //   .x(function(d) {
+      //     return xScale(+d.DIA_MANDATO);
+      //   })
+      //   .y(function(d) {
+      //     return yScale(+d[measure] - 2);
+      //   })
+      //   .curve(d3.curveStepBefore);
+
+
       const svg = d3.select(svgSelector);
 
+      // Main lines
       svg.selectAll(lineSelector)
         .data(data)
         .enter()
@@ -304,6 +433,56 @@ function drawChart(fp, segment, presidents) {
             return lineGenerator(d.values);
           })
 
+      // // Upper error
+      // svg.selectAll(lineSelector + '-upper-error')
+      //   .data(data)
+      //   .enter()
+      //     .append("path")
+      //     .attr("class", "president-line")
+      //     .attr("id", function(d){
+      //       let id = d.key.toLowerCase();
+      //           id = id.replace(/ /g, '-'); // Regex to remove spaces
+      //       return `line-${id}`; 
+      //     })
+      //     .attr("fill", "none")
+      //     .attr("stroke-width", .5)
+      //     .attr("stroke", function(d){
+      //       if (d.key === "Jair Bolsonaro") {
+      //         return "#60c060"
+      //       }
+      //       else {
+      //         return "#303030";
+      //       }
+      //     })
+      //     .attr("d", function(d){
+      //       return upperError(d.values);
+      //     })
+
+      // // Lower error
+      // svg.selectAll(lineSelector + '-lower-error')
+      //   .data(data)
+      //   .enter()
+      //     .append("path")
+      //     .attr("class", "president-line")
+      //     .attr("id", function(d){
+      //       let id = d.key.toLowerCase();
+      //           id = id.replace(/ /g, '-'); // Regex to remove spaces
+      //       return `line-${id}`; 
+      //     })
+      //     .attr("fill", "none")
+      //     .attr("stroke-width", .5)
+      //     .attr("stroke", function(d){
+      //       if (d.key === "Jair Bolsonaro") {
+      //         return "#60c060"
+      //       }
+      //       else {
+      //         return "#303030";
+      //       }
+      //     })
+      //     .attr("d", function(d){
+      //       return lowerError(d.values);
+      //     })
+
     } // End of addLines
 
     function addPoints(data, svgSelector, pointSelector, xScale, yScale, measure) {
@@ -323,7 +502,7 @@ function drawChart(fp, segment, presidents) {
           .attr("r", 3)
           .attr("fill", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
           .style("visibility", "hidden")
-          // .html('<animate attributeName=\"r\" from=\"3\" to=\"20\" dur=\"1.5s\" begin=\"0s\" repeatCount=\"indefinite\"/><animate attributeName="opacity" from=\"1\" to=\"0\" dur=\"1.5s\" begin=\"0s\" repeatCount="indefinite\"/>')
+
 
       let fakePoints = svg.selectAll("fake-point")
         .data(data)
@@ -362,6 +541,8 @@ function drawChart(fp, segment, presidents) {
       text below the mais chart */
 
       function computeInfo(data, measure, presidents) {
+        /* Helper function that calculates the values
+        for the chart helper */
 
         function computeBolsoTime(dataArray) {
           /* This functions how many days passed
@@ -423,9 +604,22 @@ function drawChart(fp, segment, presidents) {
         let bolsoMeasures   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
         let otherMeasures   = computeClosestPoll(dataOther, bolsoTime.days, measure);
 
-        let comparison = bolsoMeasures.value > otherMeasures.value ? "maior" : "menor";
+        let significant = Math.abs(bolsoMeasures.value - otherMeasures.value) > 2 ? true : false 
 
-        let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, <span class="dynamic"> <strong>${comparison}</strong></span> que a de <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
+        if (significant) {
+          
+          var comparison = bolsoMeasures.value > otherMeasures.value ? "<span class=dynamic>maior</span> que a de " : "<span class=dynamic>menor</span> que a de";
+
+        } // End of if
+
+        else {
+
+          var comparison = "<span class=\"dynamic\">empatada</span> na margem de erro com a de"
+
+        } // End of else
+
+
+        let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, ${comparison} <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
 
         return {
 
@@ -433,7 +627,6 @@ function drawChart(fp, segment, presidents) {
           highlightDates: [ bolsoMeasures.date, otherMeasures.date ]
 
         }
-
       } // End of computeInfo
 
       function showPoint(pointSelector, highlightDates) {
@@ -513,6 +706,9 @@ function drawChart(fp, segment, presidents) {
       d3.selectAll('.president-line')
         .remove();
 
+      d3.selectAll('.president-line-error')
+        .remove();
+
       d3.selectAll(".poll-point")
         .remove();
 
@@ -539,10 +735,11 @@ function drawChart(fp, segment, presidents) {
 
     csvData = parseData(csvData);
 
-    const chartDimensions = setDimensions(),
+    const chartDimensions = setDimensions("mainChart"),
           chartScales     = setScales(chartDimensions);
 
-    addSvg(".chart", 
+    addSvg(".main-chart",
+           "main-chart",
            chartDimensions);
 
     addAxis("g.main-chart", 
