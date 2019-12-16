@@ -169,7 +169,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
       for desktop */
 
       let dimensions = { };
-      dimensions.margin = { top: 20, left: 60, right: 20, bottom: 60};
+      dimensions.margin = { top: 20, left: 60, right: 22, bottom: 60};
 
 
       if ( isMobile() ) {
@@ -189,7 +189,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
       else {
 
           dimensions.height = 300 - dimensions.margin.top - dimensions.margin.bottom,
-          dimensions.width  = 600 - dimensions.margin.left - dimensions.margin.right;
+          dimensions.width  = 700 - dimensions.margin.left - dimensions.margin.right;
       
       }
 
@@ -230,7 +230,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
               let tickNo = d / 365;
 
-              tickText = `${tickNo + 1}º ano`
+              var tickText = tickNo > 1 ? `${tickNo} anos` : `${tickNo} ano`;
 
               if (tickNo == 0) {
 
@@ -238,47 +238,34 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
               }
 
-              else if (tickNo == 4) {
-
-                tickText = "2º mandato";
-
-              }
-
-              else if (tickNo == 8) {
-
-                tickText = "Fim"
-
-              }
-
               return tickText;
             }) // End of function(d);
             .tickValues( d3.range ( 0, 365 * 8 + 1, 365 ) ); // Show ticks every 365 days
 
-          d3.select(cssSelector)
+          let xAxisHolder = d3.select(cssSelector)
             .append("g")
             .attr("class", "x-axis")
             .attr("fill", "black")
             .attr("transform", `translate(0,${dimensions.height + 20})`)
-            .call(xAxis)
-            .select(".domain") // Selects the axis vertical line...
+            .call(xAxis);
+            xAxisHolder.select(".domain") // Selects the axis vertical line...
               .remove()       // ...and removes it
 
-          // Format ticks text
-          let tickTexts = d3.selectAll(".x-axis .tick text")
-            .attr("class", function(d){
-              if ( [ 0, 1460, 2920].includes(d) ) { // 1º, 5º and last tick according to the bound datapoints
-               return "tick-highlight";
-              }
-               else {
-                return "ordinary-tick";
-               }
-            });
+          xAxisHolder.selectAll(".x-axis .tick text")
+            .attr("class", "ordinary-tick");
+
+          // Adds text BELOW the first tick
+          xAxisHolder.select(".x-axis g.tick:first-of-type")
+            .append("text")
+            .attr("class", "tick-highlight")
+            .text("1º mandato")
+            .attr("dy", 40);
 
           // Adds text BELOW the halfway tick
-          d3.select(".x-axis g.tick:nth-of-type(5n)")
+          xAxisHolder.select(".x-axis g.tick:nth-of-type(5n)")
             .append("text")
-            .attr("class", "ordinary-tick")
-            .text("5º ano")
+            .attr("class", "tick-highlight")
+            .text("2º mandato")
             .attr("dy", 40);
 
         } // End of if (isMobile)
@@ -290,7 +277,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
               let tickNo = d / 365;
 
-              tickText = ""
+              var tickText = tickNo > 1 ? `${tickNo} anos` : `${tickNo} ano`;
 
               if (tickNo == 0) {
 
@@ -298,54 +285,35 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
               }
 
-              else if (tickNo == 4) {
-
-                tickText = "2º mandato";
-
-              }
-
-              else if (tickNo == 8) {
-
-                tickText = "Fim"
-
-              }
-
               return tickText;
             }) // End of function(d);
             .tickValues( d3.range ( 0, 365 * 8 + 1, 365 * 4 ) ); // Show ticks every 365 days
 
-          d3.select(cssSelector)
+         let xAxisHolder = d3.select(cssSelector)
             .append("g")
             .attr("class", "x-axis")
             .attr("fill", "black")
             .attr("transform", `translate(0,${dimensions.height + 20})`)
-            .call(xAxis)
-            .select(".domain") // Selects the axis vertical line...
+            .call(xAxis);
+
+          xAxisHolder.select(".domain") // Selects the axis vertical line...
               .remove()       // ...and removes it
 
-          // Format ticks text
-          let tickTexts = d3.selectAll(".x-axis .tick text")
-            .attr("class", function(d){
-              if ( [ 0, 1460, 2920].includes(d) ) { // 1º, 5º and last tick according to the bound datapoints
-               return "tick-highlight";
-              }
-               else {
-                return "ordinary-tick";
-              }
-            });
+          xAxisHolder.selectAll(".x-axis .tick text")
+            .attr("class", "ordinary-tick");
 
           // Adds text BELOW the 1st tick
-          let firstTick = d3.select(".x-axis g.tick:first-of-type");
-          firstTick.append("text")
-            .attr("class", "ordinary-tick")
-            .text("1º ano")
-            .attr("dy", 40);
+          xAxisHolder.select(".x-axis g.tick:first-of-type")
+              .append("text")
+              .attr("class", "tick-highlight")
+              .text("1º mandato")
+              .attr("dy", 40);
 
           // Adds text BELOW the halfway tick
-          let secondTick = d3.select(".x-axis g.tick:nth-of-type(2n)");
+          let secondTick = xAxisHolder.select(".x-axis g.tick:nth-of-type(2n)");
           secondTick.append("text")
-            .attr("class", "ordinary-tick")
-            .text("5º ano")
+            .attr("class", "tick-highlight")
+            .text("2º mandato")
             .attr("dy", 40);
 
         } // End of else
