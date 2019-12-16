@@ -65,7 +65,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
     } // End of parseData
 
-  function drawChart(data, target, segment, presidents, drawPoints) {
+  function drawChart(data, target, segment, presidents, mainChart) {
 
     ////////////////////////////////////////
     ////// MOBILE-DETECTING FUNCTIONS //////
@@ -378,7 +378,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
     } // End of addAxis
 
-    function plotData(data, presidents, svgSelector, scales, measure, drawPoints) {
+    function plotData(data, presidents, svgSelector, scales, measure, mainChart) {
       /* Proccess the data and plots
       the relevant datapoints */
 
@@ -473,7 +473,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
       } // End of addPoints
 
-      function updateChart(data, measure, presidents, svgSelector, pointSelector, drawPoints) {
+      function updateChart(data, measure, presidents, svgSelector, pointSelector, mainChart) {
         /* Updates the dynamic explainer 
         text below the mais chart */
 
@@ -566,11 +566,11 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
           }
         } // End of computeInfo
 
-        function showPoint(pointSelector, highlightDates, drawPoints) {
+        function showPoint(pointSelector, highlightDates, mainChart) {
           /* Makes the two points relevant
           to the comparison pulsate */
 
-          if( drawPoints ) {
+          if( mainChart ) {
             let points = d3.selectAll(pointSelector)
                 .style("visibility", d => highlightDates.includes(d.DATA_PESQUISA) ? "visible" : "hidden" )
             // console.log(points);
@@ -578,17 +578,18 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
         } // End of showPoint
 
-        let explainerDiv = d3.select("div.span-holder.chart-explainer");
-        let info = computeInfo(data, measure, presidents);
 
-        explainerDiv.html(info.html);
-        showPoint(pointSelector, info.highlightDates, drawPoints);
+          let explainerDiv = d3.select("div.span-holder.chart-explainer");
+          let info = computeInfo(data, measure, presidents);
+
+          explainerDiv.html(info.html);
+          showPoint(pointSelector, info.highlightDates, mainChart);
 
       } // End of updateChart
 
       let filteredData = filterData(data, segment, presidents);
       
-      if (drawPoints) {
+      if (mainChart) {
         // console.log("Drew points");
         addPoints(filteredData,
           svgSelector,
@@ -607,13 +608,17 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
                scales.y,
                measure);
 
+      if (mainChart) {
 
-      updateChart(filteredData,
-                  measure,
-                  presidents,
-                  svgSelector,
-                  ".poll-point",
-                  drawPoints);
+        updateChart(filteredData,
+                    measure,
+                    presidents,
+                    svgSelector,
+                    ".poll-point",
+                    mainChart);
+
+      } // End of if
+
 
     } // End of plotData
 
@@ -714,7 +719,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
 
     } // End of redrawSmallMultiples
 
-    function render(data, target, chartDimensions, chartScales, presidents, drawPoints) {
+    function render(data, target, chartDimensions, chartScales, presidents, mainChart) {
 
         addSvg(`.${target}`,
                target,
@@ -730,7 +735,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
                  `g.${target}`,
                  chartScales,
                  "POSITIVA",
-                 drawPoints);
+                 mainChart);
 
       } // End of render
 
@@ -747,7 +752,7 @@ d3.csv("data/evolucao-ibope-limpo.csv").then(function(csvData) {
              chartDimensions, 
              chartScales, 
              presidents,
-             drawPoints);
+             mainChart);
 
 
   } // End of draw chart
