@@ -320,7 +320,7 @@ function drawChart(fp, segment, presidents) {
             }
              else {
               return "ordinary-tick";
-             }
+            }
           });
 
         // Adds text BELOW the 1st tick
@@ -511,26 +511,26 @@ function drawChart(fp, segment, presidents) {
           .attr("class", "fake-point poll-point")
           .attr("cx", d => xScale(d.DIA_MANDATO))
           .attr("cy", d => yScale(d[measure]))
-          .attr("r", 3)
+          .attr("r", "3")
           .attr("fill", "none")
           .attr("stroke", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
           .style("visibility", "hidden")
 
       // Adds animation to the fake point on the outside
       fakePoints.append("animate")
+                  .attr("attributeType", "XML")
                   .attr("attributeName", "r")
-                  .attr("from", "1")
+                  .attr("from", "3")
                   .attr("to", "30")
                   .attr("dur", "1.5s")
-                  .attr("begin", "0s")
                   .attr("repeatCount", "indefinite");
 
       fakePoints.append("animate")
+                  .attr("attributeType", "XML")
                   .attr("attributeName", "opacity")
                   .attr("from", "1")
                   .attr("to", "0")
                   .attr("dur", "1.5s")
-                  .attr("begin", "0s")
                   .attr("repeatCount", "indefinite");
 
 
@@ -758,4 +758,4 @@ function drawChart(fp, segment, presidents) {
 
 } // End of draw chart
 
-drawChart("../data/evolucao-ibope-limpo.csv", "total", [ "Jair Bolsonaro", "Michel Temer" ] );
+drawChart("data/evolucao-ibope-limpo.csv", "total", [ "Jair Bolsonaro", "Michel Temer" ] );
