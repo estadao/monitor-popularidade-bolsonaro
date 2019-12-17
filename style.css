@@ -4,7 +4,6 @@ html {
   background-color: #FAFAFA;
 
 }
-
 /* Logo Estadão */
 img.face {
   height: 100px;
@@ -30,11 +29,6 @@ img.logo {
   max-width: 1200px;
 }
 
-.holder {
-  margin: auto;
-  padding: 10px;
-  max-width: 900px;
-}
 
 .main-chart {
   text-align: center;
@@ -45,7 +39,12 @@ img.logo {
 .small-multiples {
   text-align: center;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+.annotations text {
+  font-weight: normal;
+  fill: #303030;
 }
 
 svg.small-multiple {
@@ -67,6 +66,11 @@ svg.small-multiple {
     font-family: "Lato", sans-serif;
   }
 }
+
+.title-holder {
+  font-weight: bold;
+}
+
 
 
 .bolso {
@@ -108,7 +112,7 @@ svg.small-multiple {
   border-radius: 2px;
 }
 
-.chart-explainer {
+.chart-explainer, .paragraph {
   margin: auto;
   line-height: 1.8;
   font-family: Lato, sans-serif;
@@ -116,6 +120,11 @@ svg.small-multiple {
   max-width: 620px;
   text-align: left;
   align-items: center;
+}
+
+.paragraph {
+  padding-top: 10px;
+  line-height: 1.5;
 }
 
 

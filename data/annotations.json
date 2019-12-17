@@ -1,0 +1,271 @@
+[ 
+
+
+  {
+
+  "note" : {
+
+    "title" : "Enviado projeto da Reforma Trabalhista",
+    "mobileWrap"  : 180,
+    "desktopWrap" : 180
+
+    },
+
+  "PRESIDENTE" : "Michel Temer",
+  "DATA" : "2016-12-23",
+  "VALOR" : 15,
+
+  "mobileDx": 0,
+  "mobileDy": -100,
+
+  "desktopDx" : 0,
+  "desktopDy" : -100
+
+  },
+
+  {
+
+  "note" : {
+
+    "title" : "Denúncias da PGR sobre caso Joesley",
+    "mobileWrap": 160,
+    "desktopWrap" : 160
+
+    },
+
+  "PRESIDENTE" : "Michel Temer",
+  "DATA" : "2017-06-26",
+  "VALOR" : 5,
+
+  "mobileDx": 0,
+  "mobileDy": -60,
+
+  "desktopDx": 0,
+  "desktopDy": -40
+
+
+  },
+
+  {
+
+  "note" : {
+
+    "title" : "Manifestações de 2013",
+    "mobileWrap"  : 180,
+    "desktopWrap" : 180
+ 
+    },
+
+  "PRESIDENTE" : "Dilma Rousseff",
+  "DATA" : "2013-06-13",
+  "VALOR" : 55,
+
+  "mobileDx": 0,
+  "mobileDy": -70,
+
+  "desktopDx" : 0,
+  "desktopDy" : -50
+
+  },
+
+  {
+
+  "note" : {
+
+    "title" : "Levy anunciado como Ministro da Fazenda",
+    "mobileWrap"  : 120,
+    "desktopWrap" : 160
+ 
+    },
+
+  "PRESIDENTE" : "Dilma Rousseff",
+  "DATA" : "2014-11-24",
+  "VALOR" : 40,
+
+  "mobileDx": 0,
+  "mobileDy": -20,
+
+  "desktopDx" : 0,
+  "desktopDy" : -20
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Passa a lei do Bolsa Família",
+  "mobileWrap"  : 100,
+  "desktopWrap" : 100
+
+  },
+
+  "PRESIDENTE" : "Lula",
+  "DATA" : "2004-01-09",
+  "VALOR" : 35,
+
+  "mobileDx": 0,
+  "mobileDy": -100,
+
+  "desktopDx" : 0,
+  "desktopDy" : -120
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Escândalo do Mensalão",
+  "mobileWrap"  : 200,
+  "desktopWrap" : 100
+
+  },
+
+  "PRESIDENTE" : "Lula",
+  "DATA" : "2005-06-06",
+  "VALOR" : 35,
+
+  "mobileDx": 0,
+  "mobileDy": 60,
+
+  "desktopDx" : 0,
+  "desktopDy" : -40
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Crescimento do PIB chega a 6%",
+  "mobileWrap"  : 120,
+  "desktopWrap" : 120
+
+  },
+
+  "PRESIDENTE" : "Lula",
+  "DATA" : "2007-11-04",
+  "VALOR" : 50,
+
+  "mobileDx": 0,
+  "mobileDy": 30,
+
+  "desktopDx" : 0,
+  "desktopDy" : 20
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Aprovada PEC da Reeleição",
+  "mobileWrap"  : 120,
+  "desktopWrap" : 120
+
+  },
+
+  "PRESIDENTE" : "Fernando Henrique Cardoso",
+  "DATA" : "1997-06-04",
+  "VALOR" : 38,
+
+  "mobileDx": 0,
+  "mobileDy": 65,
+
+  "desktopDx" : 0,
+  "desktopDy" : -60
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Banco Central adota câmbio flutuante",
+  "mobileWrap"  : 130,
+  "desktopWrap" : 150
+
+  },
+
+  "PRESIDENTE" : "Fernando Henrique Cardoso",
+  "DATA" : "1999-01-15",
+  "VALOR" : 23,
+
+  "mobileDx": -1,
+  "mobileDy": -100,
+
+  "desktopDx" : 0,
+  "desktopDy" : -50
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Crise do apagão",
+  "mobileWrap"  : 130,
+  "desktopWrap" : 150
+
+  },
+
+  "PRESIDENTE" : "Fernando Henrique Cardoso",
+  "DATA" : "2001-05-16",
+  "VALOR" : 23,
+
+  "mobileDx": -1,
+  "mobileDy": -60,
+
+  "desktopDx" : 0,
+  "desktopDy" : -40
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Início do Plano Real",
+  "mobileWrap"  : 160,
+  "desktopWrap" : 160
+
+  },
+
+  "PRESIDENTE" : "Itamar Franco",
+  "DATA" : "1994-02-24",
+  "VALOR" : 20,
+
+  "mobileDx": 0,
+  "mobileDy": -90,
+
+  "desktopDx" : 0,
+  "desktopDy" : -90
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "Congelamento das cadernetas de poupança",
+  "mobileWrap"  : 150,
+  "desktopWrap" : 150
+
+  },
+
+  "PRESIDENTE" : "Fernando Collor",
+  "DATA" : "1990-05-01",
+  "VALOR" : 45,
+
+  "mobileDx": 30,
+  "mobileDy": -40,
+
+  "desktopDx" : 30,
+  "desktopDy" : -40
+
+  }
+
+
+
+]
