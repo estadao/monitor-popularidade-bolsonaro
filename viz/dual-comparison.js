@@ -811,8 +811,6 @@ d3.json("data/annotations.json").then(function(jsonData) {
 
     /* Execution of drawChart() 
     starts below this line */
-
-    balanceText();
     
     setListeners = false;
     csvData = parseData(csvData);
