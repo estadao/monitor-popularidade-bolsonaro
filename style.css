@@ -35,7 +35,7 @@ img.logo {
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 72px;
+  height: 54px;
   background-color: #fafafa;
 }
 
@@ -49,7 +49,22 @@ img.logo {
 .main-chart {
   text-align: center;
   padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.main-chart-wrapper {
   padding-bottom: 40px;
+  align-items: center;
+}
+
+.asterisk {
+  margin: auto;
+  width: 50%;
+  align-items: center;
+  font-size: 14px;
+  text-align: center;
+  color: #818181;
+  width: 300px;
 }
 
 .small-multiples {
@@ -71,13 +86,30 @@ img.logo {
     font-family: "Lato", sans-serif;
   }
 
+.president-selector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align-last: center;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  padding-left: 5px;
+  padding-right: 22px;
+  padding-bottom: 4px;
+  border: 1px solid #303030;
+  border-radius: 2px;
+}
+
 @media (max-width: 800px) {
   .title-holder, .title-holder select {
     text-align: center;
-    line-height: 1.8;
-    font-size: 24px;
+    line-height: 1.4;
+    font-size: 22px;
     font-family: "Lato", sans-serif;
   }
+
 }
 
 .title-holder {
@@ -108,22 +140,6 @@ img.logo {
   align-items: center;
   top: -.25em;
   margin: 0 .5em;
-}
-
-.president-selector {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-align-last: center;
-  background: transparent;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-  background-repeat: no-repeat;
-  background-position-x: 100%;
-  background-position-y: 16px;
-  padding-left: 5px;
-  padding-right: 22px;
-  padding-bottom: 4px;
-  border: 1px solid #303030;
-  border-radius: 2px;
 }
 
 .chart-explainer p {

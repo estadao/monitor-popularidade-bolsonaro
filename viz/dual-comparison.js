@@ -173,7 +173,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
         for desktop */
 
         let dimensions = { };
-        dimensions.margin = { top: 20, left: 60, right: 22, bottom: 60};
+        dimensions.margin = { top: 20, left: 40, right: 22, bottom: 60};
 
 
         if ( isMobile() ) {
@@ -528,7 +528,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
             } // End of else
 
 
-            let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro.</span> O levantamento revelou que popularidade do presidente (ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong>) é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, ${comparison} <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
+            let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro</span> e revelou que <strong>popularidade*</strong> do presidente é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, ${comparison} <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
 
             return {
 
@@ -811,6 +811,8 @@ d3.json("data/annotations.json").then(function(jsonData) {
 
     /* Execution of drawChart() 
     starts below this line */
+
+    balanceText();
     
     setListeners = false;
     csvData = parseData(csvData);
@@ -869,5 +871,6 @@ d3.json("data/annotations.json").then(function(jsonData) {
     console.log(csvData);
 
   }); // End of d3.csv
+
 
 }); // End of d3.json

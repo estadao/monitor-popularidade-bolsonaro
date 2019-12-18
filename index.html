@@ -18,7 +18,7 @@
 
     <div class="content">
 
-        <div class="title-holder">
+        <div class="title-holder balance-text">
           <span class="common">Quero comparar a </span>
 
           <select class="measure-selector" style="display:none; pointer-events: none">
@@ -45,7 +45,13 @@
 
         <div class="chart-explainer"></div>
 
-        <div class="main-chart"></div>
+        <div class="main-chart-wrapper">
+
+          <div class="main-chart"></div>
+
+          <p class="asterisk">*ou seja, a quantidade de pessoas que consideram seu governo <strong>ótimo ou bom</strong></p>
+
+        </div>
 
         <div class="author">
 
@@ -199,5 +205,8 @@
 
   <!-- chart -->
   <script src="viz/dual-comparison.js"></script>
+
+  <!-- balance text -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/3.3.0/balancetext.min.js"></script>
 
 </html>
