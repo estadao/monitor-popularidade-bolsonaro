@@ -551,7 +551,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
           } // End of showPoint
 
 
-            let explainerDiv = d3.select("div.span-holder.chart-explainer");
+            let explainerDiv = d3.select("div.chart-explainer");
             let info = computeInfo(data, measure, presidents);
 
             explainerDiv.html(info.html);
@@ -626,19 +626,22 @@ d3.json("data/annotations.json").then(function(jsonData) {
 
           annotation["type"] = d3.annotationCallout;
           // annotation["connector"] = { "curve" : d3.curveBasis };
-          annotation["x"] = chartScales.x(annotation["DIA_MANDATO"])
-          annotation["y"] = chartScales.y(annotation["VALOR"])
+          annotation["x"] = chartScales.x(annotation["DIA_MANDATO"]);
+          annotation["y"] = chartScales.y(annotation["VALOR"]);
+
+         // annotation["note"]["bgPadding"] = {"top":5,"left":0,"right":5,"bottom":3};
+          annotation["connector"] =  { end: "dot" };
+
 
           let mobileDevice = isMobile();
 
           annotation["dx"] = mobileDevice ? annotation["mobileDx"] : annotation["desktopDx"];
           annotation["dy"] = mobileDevice ? annotation["mobileDy"] : annotation["desktopDy"];
+
           annotation["note"]["wrap"] = mobileDevice ? annotation["note"]["mobileWrap"] : annotation["note"]["desktopWrap"];
           annotation["note"]["wrap"] = mobileDevice ? annotation["note"]["mobileWrap"] : annotation["note"]["desktopWrap"];
 
         } // End of for
-
-        console.log(annotations);
 
         let makeAnnotations = d3.annotation()
           .type(d3.annotationLabel)
@@ -862,6 +865,8 @@ d3.json("data/annotations.json").then(function(jsonData) {
       [ "Jair Bolsonaro", "Fernando Collor" ],
       false,
       true);
+
+    console.log(csvData);
 
   }); // End of d3.csv
 

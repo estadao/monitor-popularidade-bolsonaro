@@ -5,7 +5,8 @@
 
   "note" : {
 
-    "title" : "Enviado projeto da Reforma Trabalhista",
+    "label" : "Enviado projeto da Reforma Trabalhista",
+    "title" : "dez. 2016",
     "mobileWrap"  : 180,
     "desktopWrap" : 180
 
@@ -27,7 +28,8 @@
 
   "note" : {
 
-    "title" : "Denúncias da PGR sobre caso Joesley",
+    "title" : "jun. 2017",
+    "label" : "Denúncias da PGR sobre caso Joesley",
     "mobileWrap": 160,
     "desktopWrap" : 160
 
@@ -50,7 +52,8 @@
 
   "note" : {
 
-    "title" : "Manifestações de 2013",
+    "title" : "jun. 2013",
+    "label" : "Manifestações populares",
     "mobileWrap"  : 180,
     "desktopWrap" : 180
  
@@ -72,7 +75,8 @@
 
   "note" : {
 
-    "title" : "Levy anunciado como Ministro da Fazenda",
+    "title" : "nov. 2014", 
+    "label" : "Levy anunciado como Ministro da Fazenda",
     "mobileWrap"  : 120,
     "desktopWrap" : 160
  
@@ -94,7 +98,8 @@
 
   "note" : {
 
-  "title" : "Passa a lei do Bolsa Família",
+  "title" : "jan. 2004",
+  "label" : "Passa a lei do Bolsa Família",
   "mobileWrap"  : 100,
   "desktopWrap" : 100
 
@@ -108,7 +113,7 @@
   "mobileDy": -100,
 
   "desktopDx" : 0,
-  "desktopDy" : -120
+  "desktopDy" : -100
 
   },
 
@@ -116,7 +121,8 @@
 
   "note" : {
 
-  "title" : "Escândalo do Mensalão",
+  "title" : "jun. 2006",
+  "label" : "Escândalo do Mensalão",
   "mobileWrap"  : 200,
   "desktopWrap" : 100
 
@@ -138,7 +144,8 @@
 
   "note" : {
 
-  "title" : "Crescimento do PIB chega a 6%",
+  "title" : "nov. 2007",
+  "label" : "Crescimento do PIB chega a 6%",
   "mobileWrap"  : 120,
   "desktopWrap" : 120
 
@@ -160,7 +167,8 @@
 
   "note" : {
 
-  "title" : "Aprovada PEC da Reeleição",
+  "title" : "jun. 1997",
+  "label" : "Aprovada PEC da Reeleição",
   "mobileWrap"  : 120,
   "desktopWrap" : 120
 
@@ -171,10 +179,10 @@
   "VALOR" : 38,
 
   "mobileDx": 0,
-  "mobileDy": 65,
+  "mobileDy": 45,
 
   "desktopDx" : 0,
-  "desktopDy" : -60
+  "desktopDy" : 30
 
   },
 
@@ -182,7 +190,8 @@
 
   "note" : {
 
-  "title" : "Banco Central adota câmbio flutuante",
+  "title" : "jan. 1999",
+  "label" : "Banco Central adota câmbio flutuante",
   "mobileWrap"  : 130,
   "desktopWrap" : 150
 
@@ -192,8 +201,8 @@
   "DATA" : "1999-01-15",
   "VALOR" : 23,
 
-  "mobileDx": -1,
-  "mobileDy": -100,
+  "mobileDx": 0,
+  "mobileDy": -130,
 
   "desktopDx" : 0,
   "desktopDy" : -50
@@ -204,17 +213,18 @@
 
   "note" : {
 
-  "title" : "Crise do apagão",
-  "mobileWrap"  : 130,
+  "title" : "mai. 2001",
+  "label" : "Crise do apagão",
+  "mobileWrap"  : 80,
   "desktopWrap" : 150
 
   },
 
   "PRESIDENTE" : "Fernando Henrique Cardoso",
   "DATA" : "2001-05-16",
-  "VALOR" : 23,
+  "VALOR" : 20,
 
-  "mobileDx": -1,
+  "mobileDx": 0,
   "mobileDy": -60,
 
   "desktopDx" : 0,
@@ -226,7 +236,8 @@
 
   "note" : {
 
-  "title" : "Início do Plano Real",
+  "title" : "fev. 1994",
+  "label" : "Início do Plano Real",
   "mobileWrap"  : 160,
   "desktopWrap" : 160
 
@@ -248,7 +259,8 @@
 
   "note" : {
 
-  "title" : "Congelamento das cadernetas de poupança",
+  "title" : "mar. 1990",
+  "label" : "Congelamento das cadernetas de poupança",
   "mobileWrap"  : 150,
   "desktopWrap" : 150
 
@@ -258,10 +270,10 @@
   "DATA" : "1990-05-01",
   "VALOR" : 45,
 
-  "mobileDx": 30,
+  "mobileDx": 0,
   "mobileDy": -40,
 
-  "desktopDx" : 30,
+  "desktopDx" : 0,
   "desktopDy" : -40
 
   }
