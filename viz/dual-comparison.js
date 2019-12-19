@@ -515,6 +515,8 @@ d3.json("data/annotations.json").then(function(jsonData) {
 
             let significant = Math.abs(bolsoMeasures.value - otherMeasures.value) > 2 ? true : false 
 
+            let president = presidents[1] == "Fernando Collor" ? "Collor" : presidents[1];
+
             if (significant) {
               
               var comparison = bolsoMeasures.value > otherMeasures.value ? "<span class=dynamic>maior</span> que a de " : "<span class=dynamic>menor</span> que a de";
@@ -528,7 +530,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
             } // End of else
 
 
-            let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Jair Bolsonaro</span> e revelou que <strong>popularidade*</strong> do presidente é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, ${comparison} <span class="dynamic">${presidents[1]} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
+            let htmlContent = `<p class="chart-explainer">A pesquisa Ibope mais recente foi feita no <span class="dynamic">${bolsoTime.months}º mês</span> de mandato de <span class="bolso">Bolsonaro</span> e revelou que a <strong>popularidade*</strong> do presidente é de <span class="dynamic"><strong>${bolsoMeasures.value}%</strong></span>, ${comparison} <span class="dynamic">${president} <strong>(${otherMeasures.value}%)</strong></span> no mesmo período.</p>`;
 
             return {
 

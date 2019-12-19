@@ -29,6 +29,12 @@ img.logo {
   height: 24px;
 }
 
+img.portrait {
+  height: 80px;
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
 .estado-header {
   display: flex;
   flex-direction: row;
@@ -74,9 +80,22 @@ img.logo {
 }
 
 .small-multiple {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
+}
+
+.small-multiple-title {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.small-multiple-subtitle {
+  color: #818181;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 0px;
 }
 
 .title-holder, .title-holder select {
@@ -156,7 +175,7 @@ img.logo {
   font-family: Lato, sans-serif;
   font-size: 16px;
   max-width: 720px;
-  text-align: justify;
+  text-align: left;
   align-items: center;
 }
 
@@ -203,7 +222,7 @@ p.paragraph {
   font-family: Lato, sans-serif;
   font-size: 16px;
   max-width: 700px;
-  text-align: justify;
+  text-align: left;
   align-items: center;
 }
 
@@ -311,6 +330,7 @@ footer {
 }
 
 .footer-wrapper {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -320,8 +340,8 @@ footer {
 }
 
 .rodape {
-  width: 101%;
-  max-width: 700px;
+  width: 80%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

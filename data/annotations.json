@@ -7,14 +7,14 @@
 
     "label" : "Enviado projeto da Reforma Trabalhista",
     "title" : "dez. 2016",
-    "mobileWrap"  : 180,
-    "desktopWrap" : 180
+    "mobileWrap"  : 140,
+    "desktopWrap" : 140
 
     },
 
   "PRESIDENTE" : "Michel Temer",
   "DATA" : "2016-12-23",
-  "VALOR" : 15,
+  "VALOR" : 12,
 
   "mobileDx": 0,
   "mobileDy": -100,
@@ -30,8 +30,8 @@
 
     "title" : "jun. 2017",
     "label" : "Denúncias da PGR sobre caso Joesley",
-    "mobileWrap": 160,
-    "desktopWrap" : 160
+    "mobileWrap": 140,
+    "desktopWrap" : 140
 
     },
 
@@ -99,7 +99,7 @@
   "note" : {
 
   "title" : "jan. 2004",
-  "label" : "Passa a lei do Bolsa Família",
+  "label" : "Aprovada lei do Bolsa Família",
   "mobileWrap"  : 100,
   "desktopWrap" : 100
 
@@ -123,7 +123,7 @@
 
   "title" : "jun. 2006",
   "label" : "Escândalo do Mensalão",
-  "mobileWrap"  : 200,
+  "mobileWrap"  : 100,
   "desktopWrap" : 100
 
   },
@@ -133,7 +133,7 @@
   "VALOR" : 35,
 
   "mobileDx": 0,
-  "mobileDy": 60,
+  "mobileDy": 40,
 
   "desktopDx" : 0,
   "desktopDy" : -40
@@ -167,22 +167,22 @@
 
   "note" : {
 
-  "title" : "jun. 1997",
-  "label" : "Aprovada PEC da Reeleição",
+  "title" : "jan. 1997",
+  "label" : "Câmara aprova PEC da Reeleição ",
   "mobileWrap"  : 120,
   "desktopWrap" : 120
 
   },
 
   "PRESIDENTE" : "Fernando Henrique Cardoso",
-  "DATA" : "1997-06-04",
-  "VALOR" : 38,
+  "DATA" : "1997-01-28",
+  "VALOR" : 51,
 
   "mobileDx": 0,
-  "mobileDy": 45,
+  "mobileDy": 70,
 
   "desktopDx" : 0,
-  "desktopDy" : 30
+  "desktopDy" : -10
 
   },
 
@@ -199,7 +199,7 @@
 
   "PRESIDENTE" : "Fernando Henrique Cardoso",
   "DATA" : "1999-01-15",
-  "VALOR" : 23,
+  "VALOR" : 22,
 
   "mobileDx": 0,
   "mobileDy": -130,
@@ -269,6 +269,29 @@
   "PRESIDENTE" : "Fernando Collor",
   "DATA" : "1990-05-01",
   "VALOR" : 45,
+
+  "mobileDx": 0,
+  "mobileDy": -40,
+
+  "desktopDx" : 0,
+  "desktopDy" : -40
+
+  },
+
+  {
+
+  "note" : {
+
+  "title" : "mai. 1992",
+  "label" : "Pedro Collor revela esquema PC Farias",
+  "mobileWrap"  : 150,
+  "desktopWrap" : 150
+
+  },
+
+  "PRESIDENTE" : "Fernando Collor",
+  "DATA" : "1992-05-27",
+  "VALOR" : 12,
 
   "mobileDx": 0,
   "mobileDy": -40,
