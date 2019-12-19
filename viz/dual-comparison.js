@@ -365,7 +365,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
             .y(function(d){
               return yScale(+d[measure]);
             })
-            .curve(d3.curveStepBefore);
+            .curve(d3.curveStep);
 
           const svg = d3.select(svgSelector);
 
