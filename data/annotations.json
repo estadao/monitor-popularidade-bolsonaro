@@ -5,10 +5,10 @@
 
   "note" : {
 
-    "label" : "Apresentado projeto da Reforma Trabalhista",
+    "label" : "Apresentados projetos das reformas Trabalhista e da Previdência",
     "title" : "dez. 2016",
-    "mobileWrap"  : 150,
-    "desktopWrap" : 150
+    "mobileWrap"  : 180,
+    "desktopWrap" : 180
 
     },
 
@@ -190,6 +190,29 @@
 
   "note" : {
 
+  "title" : "set. 1998",
+  "label" : "Crise na Rússia afeta economia",
+  "mobileWrap"  : 120,
+  "desktopWrap" : 120
+
+  },
+
+  "PRESIDENTE" : "Fernando Henrique Cardoso",
+  "DATA" : "1998-09-31",
+  "VALOR" : 40,
+
+  "mobileDx": 0,
+  "mobileDy": -85,
+
+  "desktopDx" : 0,
+  "desktopDy" : -70
+
+  },
+
+  {
+
+  "note" : {
+
   "title" : "jan. 1999",
   "label" : "Banco Central adota câmbio flutuante",
   "mobileWrap"  : 130,
@@ -202,7 +225,7 @@
   "VALOR" : 22,
 
   "mobileDx": 0,
-  "mobileDy": -130,
+  "mobileDy": -50,
 
   "desktopDx" : 0,
   "desktopDy" : -50
@@ -225,13 +248,35 @@
   "VALOR" : 19,
 
   "mobileDx": 0,
-  "mobileDy": -60,
+  "mobileDy": 10,
 
   "desktopDx" : 0,
   "desktopDy" : -40
 
   },
 
+  {
+
+  "note" : {
+
+  "title" : "jan. 1993",
+  "label" : "Inflação acumulada supera 2000% no ano",
+  "mobileWrap"  : 160,
+  "desktopWrap" : 160
+
+  },
+
+  "PRESIDENTE" : "Itamar Franco",
+  "DATA" : "1993-01-01",
+  "VALOR" : 35,
+
+  "mobileDx": 0,
+  "mobileDy": -100,
+
+  "desktopDx" : 0,
+  "desktopDy" : -100
+
+  },
   {
 
   "note" : {
@@ -248,12 +293,13 @@
   "VALOR" : 19,
 
   "mobileDx": 0,
-  "mobileDy": -90,
+  "mobileDy": -70,
 
   "desktopDx" : 0,
-  "desktopDy" : -90
+  "desktopDy" : -70
 
   },
+
 
   {
 

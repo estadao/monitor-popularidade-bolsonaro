@@ -381,13 +381,13 @@ d3.json("data/annotations.json").then(function(jsonData) {
                 return `line-${id}`; 
               })
               .attr("fill", "none")
-              .attr("stroke-width", 3)
-              .attr("stroke", function(d){
+              .style("stroke-width", 2)
+              .style("stroke", function(d){
                 if (d.key === "Jair Bolsonaro") {
                   return "#60c060"
                 }
                 else {
-                  return "#303030";
+                  return "#555555";
                 }
               })
               .attr("d", function(d){
@@ -411,7 +411,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
               .attr("cx", d => xScale(d.DIA_MANDATO))
               .attr("cy", d => yScale(d[measure]))
               .attr("r", 3)
-              .attr("fill", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
+              .style("fill", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#555555" )
               .style("visibility", "hidden")
 
           let fakePoints = svg.selectAll("fake-point")
@@ -423,7 +423,7 @@ d3.json("data/annotations.json").then(function(jsonData) {
               .attr("cy", d => yScale(d[measure]))
               .attr("r", "3")
               .attr("fill", "none")
-              .attr("stroke", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#303030" )
+              .style("stroke", d => d.PRESIDENTE == "Jair Bolsonaro" ? "#60c060" : "#555555" )
               .style("visibility", "hidden")
 
           // Adds animation to the fake point on the outside
@@ -513,9 +513,9 @@ d3.json("data/annotations.json").then(function(jsonData) {
             let bolsoMeasures   = computeClosestPoll(dataBolsonaro, bolsoTime.days, measure)
             let otherMeasures   = computeClosestPoll(dataOther, bolsoTime.days, measure);
 
-            let significant = Math.abs(bolsoMeasures.value - otherMeasures.value) > 2 ? true : false 
+            let significant = Math.abs(bolsoMeasures.value - otherMeasures.value) > 4 ? true : false 
 
-            let president = presidents[1] == "Fernando Collor" ? "Collor" : presidents[1];
+            let president = presidents[1];
 
             if (significant) {
               
@@ -613,6 +613,8 @@ d3.json("data/annotations.json").then(function(jsonData) {
                    chartScales,
                    "POSITIVA",
                    mainChart);
+
+          d3.selectAll("#line-jair-bolsonaro").raise();
 
       } // End of render
 
@@ -867,8 +869,6 @@ d3.json("data/annotations.json").then(function(jsonData) {
       [ "Jair Bolsonaro", "Fernando Collor" ],
       false,
       true);
-
-    console.log(csvData);
 
   }); // End of d3.csv
 
